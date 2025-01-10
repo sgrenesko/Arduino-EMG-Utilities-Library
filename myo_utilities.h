@@ -23,7 +23,9 @@ class MyoUtil{
   //Serial plotting for the sensor data
     void serialPlot();
 
+    void ledAction(bool ledState, int ledPin);
   private:
-    int _pin; //Analog data pin
+    int _pin, _ledPin; //Analog data pin
+    bool _ledState
 };
 #endif
