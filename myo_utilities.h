@@ -1,23 +1,29 @@
-#ifndef MYO_UTILITIES_H
-#define MYO_UTILITIES_H
+/*
+Myoelectric Utilities Library by Stephen Grenesko
 
-#include <Arduino.h>
+This library contains a variety of pre made functions in order to 
+streamline the software used by microcontrollers in conjunction
+with myoelectric sensors. 
+This library will allow for cleaner code practices,
+ as well as creating a layer of abstraction to remove
+the need of tedious serial porting and pin setup. 
+Supports more simplistic interaction between the sensor and standard controlled hardware.
+
+*/
+
+#ifndef myo_utilities_h
+#define myo_utilities_h
+
+#include "Arduino.h"
+
 class MyoUtil{
   public:
+  //Object creation for myoware sensor data pin, based on MyoWare 2.0 hardware I/O
+    MyoUtil(int pin);
+  //Serial plotting for the sensor data
+    void serialPlot();
 
-  //Prints the data recieved from the MyoWare from the declared analog pin 
-  //into the SerialMonitor with some lines for context, returns current value
-  //for use in calculations
-  //Variable to pass: analog pin number (i.e. A0)
-  int data(int analog);
-
-  //Uses the data from the MyoWare to control an LED, 
-  //current control flow is that the LED is toggled to the 
-  //desired state when the sensor is activated
-  //Variables: LED pin num, MyoWare reading from data, and String ("OFF", "ON", or "BLINK")
-  void led(int led, int val, String state);
-
-  
-
+  private:
+    int _pin; //Analog data pin
 };
 #endif
