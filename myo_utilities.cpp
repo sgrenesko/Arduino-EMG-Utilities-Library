@@ -3,11 +3,11 @@
 
 MyoUtil::MyoUtil(int pin){
   _pin=pin;
+  pinMode(_pin, INPUT_PULLUP);
 }
 
 void MyoUtil::serialPlot()
 {
-  pinMode(_pin, INPUT_PULLUP);
   Serial.begin(115200);
   int currVal=analogRead(_pin);
   Serial.print("\nCurrent EMG Reading: ");
