@@ -5,7 +5,7 @@ This library was written with the intent to streamline the software used to have
 
 ## Current functionality
 
-# EMG Sensor Object
+### EMG Sensor Object
 
 ***MyoUtil myo(int myoPin)*** - This is the EMG sensor object. You must call it at the beginning of the sketch and initialize the object with the *int myoPin* the EMG sensor is connected to.
 
