@@ -10,22 +10,23 @@ the need of tedious serial porting and pin setup.
 Supports more simplistic interaction between the sensor and standard controlled hardware.
 
 */
-
-#ifndef myo_utilities_h
-#define myo_utilities_h
+#ifndef MYO_UTILITIES_H
+#define MYO_UTILITIES_H
 
 #include "Arduino.h"
 
-class MyoUtil{
+class MyoUtil {
   public:
-  //Object creation for myoware sensor data pin, based on MyoWare 2.0 hardware I/O
-    MyoUtil(int pin);
-  //Serial plotting for the sensor data
-    void serialPlot();
-
+    MyoUtil(int pin);       //Constructor for EMG pin
+    void begin(long baud=115200); //Serial init
+    void serialPlot();      //Stream EMG to Serial Plotter
+    int readRaw();          //Return raw EMG reading
     void ledAction(bool ledState, int ledPin);
+
   private:
-    int _pin, _ledPin; //Analog data pin
-    bool _ledState
+    int _pin;
+    int _ledPin;
+    bool _ledState;
 };
+
 #endif
