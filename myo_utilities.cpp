@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include <Servo.h>
 #include "myo_utilities.h"
 
 MyoUtil::MyoUtil(int pin)
@@ -23,19 +24,49 @@ int MyoUtil::readRaw()
   return analogRead(_pin);
 }
 
-void MyoUtil::ledAction(bool ledState, int ledPin)
+void MyoUtil::ledToggle(bool ledState, int ledPin, int threshold)
 {
   _ledState = ledState;
   _ledPin = ledPin;
   pinMode(_ledPin, OUTPUT);
 
-  if (_ledState)
+  int currVal = analogRead(_pin);
+  int mappedVal = map(currVal, 0, 1023, 0, 255);
+
+  if (mappedVal > threshold)
   {
-    digitalWrite(_ledPin, HIGH);
+    if (_ledState)
+    {
+      digitalWrite(_ledPin, HIGH);
+    }
+    else
+    {
+      digitalWrite(_ledPin, LOW);
+    }
   }
   else
   {
-    digitalWrite(_ledPin, LOW);
+    if (_ledState)
+    {
+      digitalWrite(_ledPin, LOW);
+    }
+    else
+    {
+      digitalWrite(_ledPin, HIGH);
+    }
   }
 }
 
+void MyoUtil::servoInit(int servoPin, int maxAngle)
+{
+  _servoPin = servoPin;
+  _maxAngle = maxAngle;
+  servo.attach(_servoPin);
+}
+
+void MyoUtil::servoUpdate()
+{
+  int currVal = analogRead(_pin);
+  int angle = map(currVal, 0, 1023, 0, _maxAngle);
+  servo.write(angle);
+}
