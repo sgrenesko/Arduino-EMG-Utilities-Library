@@ -22,10 +22,11 @@ public:
   MyoUtil(int pin);               //Constructor for EMG pin
   void serialPlot();              //Stream EMG to Serial Plotter
   int readRaw();                  //Return raw EMG reading
-  void ledToggle(bool ledState, int ledPin, int threshold);    //Control an LED based on muscle activity
+  void ledInit(int ledPin);      //LED init
+  void ledToggle(bool ledState, int threshold);    //Control an LED based on muscle activity
   void servoInit(int servoPin, int maxAngle);   //Servo init
   void servoUpdate();                           //Update servo position based on muscle activity
-  void buzzControl(int buzzPin, int maxFrequency); //Control a buzzer based on muscle activity
+  void buzzControl(int buzzPin, long maxFrequency); //Control a buzzer based on muscle activity
 private:
   int _pin;
   int _ledPin;

@@ -16,13 +16,18 @@ The library has two functions to pull readings from the EMG sensor.
 ***myo.serialPlot()*** - This void function has no parameters and prints the values read from the EMG sensor onto a Serial plot in the IDE
 ***myo.readRaw()*** - This int function returns the current value being read by the EMG sensor. **NOTE**: if read in the loop function this value will constantly update.
 
-### Basic LED control
+### Basic LED Control
 
 The library supports basic control of bare LEDs via the EMG sensor readings.
 ***void ledToggle(bool ledState, int ledPin, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
 
-### Basic servo control
+### Basic Servo Control
 
 The library supports a basic mapping of muscle flexing intensity to the degrees a servo is turned to.
 ***void servoInit(int servoPin, int maxAngle)*** - This void function sets up the servo for the user using the given *int servoPin*, as well as passes in the *int maxAngle* the servo can turn for use in the mapping process.
 ***void servoUpdate()*** - This void function changes the angle of the servo to match the intensity of the EMG reading. A stronger flex being read translates to an angle closer to the given servo's maximum rotation. Will not work with continuous rotation servos as is.
+
+### Basic Buzzer Control
+
+The library supports a basic mapping of the EMG readings to the pitch of a piezo buzzer
+***myo.buzzerControl(int buzzPin, long maxFrequency)*** - This function initializes a buzzer with a maximum frequency. The reading of the EMG sensor then creates a tone proportional to its strength across the buzzer.
