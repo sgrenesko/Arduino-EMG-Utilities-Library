@@ -14,19 +14,18 @@ Supports more simplistic interaction between the sensor and standard controlled 
 #define MYO_UTILITIES_H
 
 #include "Arduino.h"
-#include <Servo.h>
+#include "Servo.h"
 
 class MyoUtil
 {
 public:
   MyoUtil(int pin);               //Constructor for EMG pin
-  void begin(long baud = 115200); //Serial init
   void serialPlot();              //Stream EMG to Serial Plotter
   int readRaw();                  //Return raw EMG reading
   void ledToggle(bool ledState, int ledPin, int threshold);    //Control an LED based on muscle activity
   void servoInit(int servoPin, int maxAngle);   //Servo init
   void servoUpdate();                           //Update servo position based on muscle activity
-
+  void buzzControl(int buzzPin, int maxFrequency); //Control a buzzer based on muscle activity
 private:
   int _pin;
   int _ledPin;
