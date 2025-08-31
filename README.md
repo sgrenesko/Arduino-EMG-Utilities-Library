@@ -1,7 +1,7 @@
 # Arduino EMG Sensor Utility Library
 Written by Stephen R Grenesko
 
-This library was written with the intent to streamline the software used to have myoelectric sensors interact with standard electronic components such as bare LEDs, servo motors, etc. There will be several methods built to support these components, and attemptes will be made to keep things well abstracted for beginner users. The goal of this library is to keep sketches involved free of the clutter of pin declarations, input and output managements etc. The secondary goal is to make the software needed to use myoelectric sensors more accesible to hobbyists and non coding background users.
+This library was written with the intent to streamline the software used to have myoelectric sensors interact with standard electronic components such as bare LEDs, servo motors, etc. There will be several methods built to support these components, and attempts will be made to keep things well abstracted for beginner users. The goal of this library is to keep sketches involved free of the clutter of pin declarations, input and output managements etc. The secondary goal is to make the software needed to use myoelectric sensors more accessible to hobbyists and non coding background users.
 
 ## Current functionality
 
@@ -25,16 +25,16 @@ The library has two functions to pull readings from the EMG sensor.
 
 The library supports basic control of bare LEDs via the EMG sensor readings.
 
-***void ledToggle(bool ledState, int ledPin, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
+***myo.ledToggle(bool ledState, int ledPin, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
 
 
 ### Basic Servo Control
 
 The library supports a basic mapping of muscle flexing intensity to the degrees a servo is turned to.
 
-***void servoInit(int servoPin, int maxAngle)*** - This void function sets up the servo for the user using the given *int servoPin*, as well as passes in the *int maxAngle* the servo can turn for use in the mapping process.
+***myo.servoInit(int servoPin, int maxAngle)*** - This void function sets up the servo for the user using the given *int servoPin*, as well as passes in the *int maxAngle* the servo can turn for use in the mapping process.
 
-***void servoUpdate()*** - This void function changes the angle of the servo to match the intensity of the EMG reading. A stronger flex being read translates to an angle closer to the given servo's maximum rotation. Will not work with continuous rotation servos as is.
+***myo.servoUpdate()*** - This void function changes the angle of the servo to match the intensity of the EMG reading. A stronger flex being read translates to an angle closer to the given servo's maximum rotation. Will not work with continuous rotation servos as is.
 
 
 ### Basic Buzzer Control
