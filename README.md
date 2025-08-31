@@ -24,6 +24,7 @@ The library has two functions to pull readings from the EMG sensor.
 ### Basic LED Control
 
 The library supports basic control of bare LEDs via the EMG sensor readings.
+
 ***void ledToggle(bool ledState, int ledPin, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
 
 
