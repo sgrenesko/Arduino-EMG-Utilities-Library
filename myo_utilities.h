@@ -15,18 +15,24 @@ Supports more simplistic interaction between the sensor and standard controlled 
 
 #include "Arduino.h"
 #include "Servo.h"
+#include "LiquidCrystal.h"
+#include "Stepper.h"
 
 class MyoUtil
 {
 public:
-  MyoUtil(int pin);               //Constructor for EMG pin
-  void serialPlot();              //Stream EMG to Serial Plotter
-  int readRaw();                  //Return raw EMG reading
-  void ledInit(int ledPin);      //LED init
-  void ledToggle(bool ledState, int threshold);    //Control an LED based on muscle activity
-  void servoInit(int servoPin, int maxAngle);   //Servo init
-  void servoUpdate();                           //Update servo position based on muscle activity
-  void buzzControl(int buzzPin, long maxFrequency); //Control a buzzer based on muscle activity
+  MyoUtil(int pin);                                 // Constructor for EMG pin
+  void serialPlot();                                // Stream EMG to Serial Plotter
+  int readRaw();                                    // Return raw EMG reading
+  void ledInit(int ledPin);                         // LED init
+  void ledToggle(bool ledState, int threshold);     // Control an LED based on muscle activity
+  void servoInit(int servoPin, int maxAngle);       // Servo init
+  void servoUpdate();                               // Update servo position based on muscle activity
+  void buzzControl(int buzzPin, long maxFrequency); // Control a buzzer based on muscle activity
+  void lcdInit();                                   // Initialize the LCD
+  void lcdPrint();                                  // Print EMG value to LCD
+  void stepperInit(int steps, int speed);           // Stepper motor init
+  void stepperUpdate();                             // Update stepper motor based on muscle activity
 private:
   int _pin;
   int _ledPin;

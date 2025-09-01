@@ -37,8 +37,24 @@ The library supports a basic mapping of muscle flexing intensity to the degrees 
 ***myo.servoUpdate()*** - This void function changes the angle of the servo to match the intensity of the EMG reading. A stronger flex being read translates to an angle closer to the given servo's maximum rotation. Will not work with continuous rotation servos as is.
 
 
+### Basic Stepper Motor Control
+
+The library supports the basic mapping of EMG readings to the movement of a stepper motor.
+
+***myo.stepperInit(int steps, int speed)*** - This void function initializes a stepper motor object with *int steps* number of steps at an RPM of *int speed*. **NOTE** This setup uses the generic Arduino stepper motor pin configuration (pins 8, 9, 10, 11), ensure they are not overwritten in your code. This functionality also requires a bipolar motor connected to the Arduino via an H-Bridge for proper signal manipulation needed for the stepper to change its polarity to mvoe.
+***myo.stepperUpdate()*** - This function maps the EMG reading proportionally to the number of steps on the motor, and moves the motor accordingly.
+
+
 ### Basic Buzzer Control
 
 The library supports a basic mapping of the EMG readings to the pitch of a piezo buzzer.
 
 ***myo.buzzerControl(int buzzPin, long maxFrequency)*** - This function initializes a buzzer with a maximum frequency. The reading of the EMG sensor then creates a tone proportional to its strength across the buzzer.
+
+
+### Generic 16x2 LCD Support
+
+The library supports using a hobbyist 16x2 liquid crystal display (LCD) to display the EMG reading. This uses the generic pin assignments typically shown in the Arduino LiquidCrystal library. Please check your pin usage in your design to ensure there is no overlap.
+
+***myo.lcdInit()*** - Sets up the lcd object using the generic pinouts (12, 11, 5, 4, 3, 2)
+***myo.lcdPrint()*** - Displays the EMG reading on the LCD
