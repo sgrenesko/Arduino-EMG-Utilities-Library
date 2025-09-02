@@ -57,4 +57,5 @@ The library supports a basic mapping of the EMG readings to the pitch of a piezo
 The library supports using a hobbyist 16x2 liquid crystal display (LCD) to display the EMG reading. This uses the generic pin assignments typically shown in the Arduino LiquidCrystal library. Please check your pin usage in your design to ensure there is no overlap.
 
 ***myo.lcdInit()*** - Sets up the lcd object using the generic pinouts (12, 11, 5, 4, 3, 2)
+
 ***myo.lcdPrint()*** - Displays the EMG reading on the LCD
