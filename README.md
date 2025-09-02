@@ -1,5 +1,4 @@
 # Arduino EMG Sensor Utility Library
-Written by Stephen R Grenesko
 
 This library was written with the intent to streamline the software used to have myoelectric sensors interact with standard electronic components such as bare LEDs, servo motors, etc. There will be several methods built to support these components, and attempts will be made to keep things well abstracted for beginner users. The goal of this library is to keep sketches involved free of the clutter of pin declarations, input and output managements etc. The secondary goal is to make the software needed to use myoelectric sensors more accessible to hobbyists and non coding background users.
 
