@@ -58,3 +58,12 @@ The library supports using a hobbyist 16x2 liquid crystal display (LCD) to displ
 ***myo.lcdInit()*** - Sets up the lcd object using the generic pinouts (12, 11, 5, 4, 3, 2)
 
 ***myo.lcdPrint()*** - Displays the EMG reading on the LCD
+
+
+### Generic Device PWM Output
+
+The library supports a generic output function of a power wave modulation pin, mapping the current output value to the intensity of the EMG reading. This can be used for any single input simple hardware to provide interaction between muscle movement and device activation.
+
+***myo.genericInit(int pin)*** - Sets up a pin for use with generic hardware (PWM only)
+
+***myo.genericUpdate()*** - Maps the intensity of the EMG reading to output a corresponding PWM signal to generic peripheral

@@ -33,6 +33,8 @@ public:
   void lcdPrint();                                  // Print EMG value to LCD
   void stepperInit(int steps, int speed);           // Stepper motor init
   void stepperUpdate();                             // Update stepper motor based on muscle activity
+  void genericInit(int pin);                        // Generic device pin init
+  void genericUpdate();                             // Generic device update based on muscle activity
 private:
   int _pin;
   int _ledPin;
@@ -41,6 +43,7 @@ private:
   int _maxAngle;
   int _steps;
   int _prevStep;
+  int _pinOUT;
   Stepper stepper;
   Servo servo;
   LiquidCrystal lcd;
