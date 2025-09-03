@@ -25,7 +25,7 @@ public:
   void serialPlot();                                // Stream EMG to Serial Plotter
   int readRaw();                                    // Return raw EMG reading
   void ledInit(int ledPin);                         // LED init
-  void ledToggle(bool ledState, int threshold);     // Control an LED based on muscle activity
+  void ledUpdate(bool ledState, int threshold);     // Control an LED based on muscle activity
   void servoInit(int servoPin, int maxAngle);       // Servo init
   void servoUpdate();                               // Update servo position based on muscle activity
   void buzzControl(int buzzPin, long maxFrequency); // Control a buzzer based on muscle activity
@@ -39,7 +39,11 @@ private:
   bool _ledState;
   int _servoPin;
   int _maxAngle;
+  int _steps;
+  int _prevStep;
+  Stepper stepper;
   Servo servo;
+  LiquidCrystal lcd;
 };
 
 #endif

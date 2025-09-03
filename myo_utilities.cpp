@@ -33,7 +33,7 @@ void MyoUtil::ledInit(int ledPin)
 }
 
 // Control an LED based on muscle activity (toggle state)
-void MyoUtil::ledToggle(bool ledState, int threshold)
+void MyoUtil::ledUpdate(bool ledState, int threshold)
 {
   _ledState = ledState;
 
@@ -70,35 +70,37 @@ void MyoUtil::servoUpdate()
 void MyoUtil::buzzControl(int buzzPin, long maxFrequency)
 {
   int currVal = analogRead(_pin);
-  int frequency = map(currVal, 0, 1023, 100, maxFrequency);
+  long frequency = map(currVal, 0, 1023, 100, maxFrequency);
   tone(buzzPin, frequency);
 }
 
 // Initialize the LCD (assuming a standard 16x2 LCD with specific pin configuration)
 void MyoUtil::lcdInit()
 {
-  LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Generic pin configuration for stanadard hobbyist 16x2 LCD
+  lcd = (12, 11, 5, 4, 3, 2); // Generic pin configuration for stanadard hobbyist 16x2 LCD
   lcd.begin(16, 2);
-  lcd.cursor(0, 0);
+  lcd.setCursor(0, 0);
   lcd.print("EMG Value (Hz):");
 }
 
 // Print the EMG value to the LCD at the specified column and row
 void MyoUtil::lcdPrint()
 {
-  lcd.cursor(0, 1);
+  lcd.setCursor(0, 1);
   lcd.print(analogRead(_pin));
   delay(10);
+  lcd.setCursor(0, 1);
   lcd.print("     ");
+  lcd.setCursor(0, 1);
 }
 
 // Initialize the stepper motor with the specified number of steps and speed
 void MyoUtil::stepperInit(int steps, int speed)
 {
-  int _steps = steps;
+  _steps = steps;
+  _prevStep = 0;
   stepper = Stepper(_steps, 8, 9, 10, 11); // Generic pin configuration for bipolar stepper motor and H-Bridge configuration
   stepper.setSpeed(speed);
-  int _prevStep = 0;
 }
 
 // Update the stepper motor position based on muscle activity
@@ -109,3 +111,4 @@ void MyoUtil::stepperUpdate()
   stepper.step(stepVal - _prevStep);
   _prevStep = stepVal;
 }
+
