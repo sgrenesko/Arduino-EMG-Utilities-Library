@@ -35,18 +35,19 @@ public:
   void stepperUpdate();                             // Update stepper motor based on muscle activity
   void genericInit(int pin);                        // Generic device pin init
   void genericUpdate();                             // Generic device update based on muscle activity
+
 private:
-  int _pin;
-  int _ledPin;
-  bool _ledState;
-  int _servoPin;
-  int _maxAngle;
-  int _steps;
-  int _prevStep;
-  int _pinOUT;
-  Stepper stepper;
-  Servo servo;
-  LiquidCrystal lcd;
+  int _pin;          // EMG sensor pinout
+  int _ledPin;       // LED pinout
+  bool _ledState;    // LED state (on/off)
+  int _servoPin;     // Servo pinout
+  int _maxAngle;     // Maximum servo angle
+  int _steps;        // Steps for stepper motor
+  int _prevStep;     // Previous stepper position
+  int _pinOUT;       // Generic device pinout
+  Stepper stepper;   // Stepper motor object
+  Servo servo;       // Servo object
+  LiquidCrystal lcd; // LCD object
 };
 
 #endif
