@@ -112,3 +112,17 @@ void MyoUtil::stepperUpdate()
   _prevStep = stepVal;
 }
 
+// Generic initialization for other output devices
+void MyoUtil::genericInit(int pin)
+{
+  _pinOUT = pin;
+  pinMode(_pinOUT, OUTPUT);
+}
+
+// Generic update function to map EMG readings to device
+void MyoUtil::genericUpdate()
+{
+  int currVal = analogRead(_pin);
+  int outVal = map(currVal, 0, 1023, 0, 255);
+  analogWrite(_pinOUT, outVal);
+}
