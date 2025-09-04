@@ -48,7 +48,9 @@ The library supports the basic mapping of EMG readings to the movement of a step
 
 The library supports a basic mapping of the EMG readings to the pitch of a piezo buzzer.
 
-***myo.buzzerControl(int buzzPin, long maxFrequency)*** - This function initializes a buzzer with a maximum frequency. The reading of the EMG sensor then creates a tone proportional to its strength across the buzzer.
+***myo.buzzInit(int buzzPin, long maxFrequency)*** - This function initializes a buzzer with a maximum frequency.
+
+***myo.buzzUpdate(bool buzzState)*** - This function will activate the buzzer, causing it to play a tone corresponding to the intensity of the EMG reading. The buzzer will activate when passed "True" and turn off when passed "False".
 
 
 ### Generic 16x2 LCD Support
