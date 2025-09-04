@@ -28,7 +28,8 @@ public:
   void ledUpdate(bool ledState, int threshold);     // Control an LED based on muscle activity
   void servoInit(int servoPin, int maxAngle);       // Servo init
   void servoUpdate();                               // Update servo position based on muscle activity
-  void buzzControl(int buzzPin, long maxFrequency); // Control a buzzer based on muscle activity
+  void buzzInit(int buzzPin, long maxFrequency);    // Initialize buzzer with frequency modulation
+  void buzzUpdate(bool buzzState);                                // Update buzzer based on muscle activity
   void lcdInit();                                   // Initialize the LCD
   void lcdPrint();                                  // Print EMG value to LCD
   void stepperInit(int steps, int speed);           // Stepper motor init
@@ -37,17 +38,19 @@ public:
   void genericUpdate();                             // Generic device update based on muscle activity
 
 private:
+  bool _ledState;    // LED state (on/off)
+  long _frequency;   // Buzzer frequency
   int _pin;          // EMG sensor pinout
   int _ledPin;       // LED pinout
-  bool _ledState;    // LED state (on/off)
   int _servoPin;     // Servo pinout
+  int _buzzPin;      // Buzzer pinout
   int _maxAngle;     // Maximum servo angle
   int _steps;        // Steps for stepper motor
   int _prevStep;     // Previous stepper position
   int _pinOUT;       // Generic device pinout
   Stepper stepper;   // Stepper motor object
   Servo servo;       // Servo object
-  LiquidCrystal lcd; // LCD object
+  LiquidCrystal* lcd; // LCD object
 };
 
 #endif
