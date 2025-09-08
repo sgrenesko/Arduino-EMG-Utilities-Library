@@ -29,7 +29,7 @@ public:
   void servoInit(int servoPin, int maxAngle);       // Servo init
   void servoUpdate();                               // Update servo position based on muscle activity
   void buzzInit(int buzzPin, long maxFrequency);    // Initialize buzzer with frequency modulation
-  void buzzUpdate(bool buzzState);                                // Update buzzer based on muscle activity
+  void buzzUpdate(bool buzzState);                  // Update buzzer based on muscle activity
   void lcdInit();                                   // Initialize the LCD
   void lcdPrint();                                  // Print EMG value to LCD
   void stepperInit(int steps, int speed);           // Stepper motor init
@@ -48,7 +48,7 @@ private:
   int _steps;        // Steps for stepper motor
   int _prevStep;     // Previous stepper position
   int _pinOUT;       // Generic device pinout
-  Stepper stepper;   // Stepper motor object
+  Stepper* stepper;   // Stepper motor object
   Servo servo;       // Servo object
   LiquidCrystal* lcd; // LCD object
 };
