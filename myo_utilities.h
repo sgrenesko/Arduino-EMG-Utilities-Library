@@ -41,6 +41,7 @@ private:
   bool _ledState;    // LED state (on/off)
   long _frequency;   // Buzzer frequency
   int _pin;          // EMG sensor pinout
+  int _currVal;      // Current EMG reading
   int _ledPin;       // LED pinout
   int _servoPin;     // Servo pinout
   int _buzzPin;      // Buzzer pinout
