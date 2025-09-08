@@ -13,9 +13,7 @@ This library was written with the intent to streamline the software used to have
 
 The library has two functions to pull readings from the EMG sensor.
 
-***myo.begin(long baud)*** This function sets up the serial for reading data from the EMG. You must pass in a valid frequency *long baud*  (i.e. 115200) 
-
-***myo.serialPlot()*** - This void function has no parameters and prints the values read from the EMG sensor onto a Serial plot in the IDE
+***myo.serialPlot()*** - This void function has no parameters and prints the values read from the EMG sensor onto a Serial plot in the IDE. It also collects the current value of the EMG sensor, and must be called in order to pass this data to any other function in this library.
 
 ***myo.readRaw()*** - This int function returns the current value being read by the EMG sensor. **NOTE**: if read in the loop function this value will constantly update.
 
@@ -24,7 +22,9 @@ The library has two functions to pull readings from the EMG sensor.
 
 The library supports basic control of bare LEDs via the EMG sensor readings.
 
-***myo.ledToggle(bool ledState, int ledPin, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
+***myo.ledInit(ledPin)*** - Designates LED controller pin and sets as output
+
+***myo.ledUpdate(bool ledState, int threshold)*** - This function toggles an LED connected via *int ledPin*, to the state declared in *bool ledState*, after the EMG passes an arbitrary *int threshold* This essentially uses muscle movement as a momentary switch for a bare led.
 
 
 ### Basic Servo Control

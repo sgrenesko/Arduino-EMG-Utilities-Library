@@ -14,7 +14,7 @@ MyoUtil::MyoUtil(int pin)
 // Output EMG reading to Serial for data visualization
 void MyoUtil::serialPlot()
 {
-  int currVal = analogRead(_pin);
+  _currVal = analogRead(_pin);
   Serial.println(currVal);
   delay(50);
 }
@@ -37,9 +37,7 @@ void MyoUtil::ledUpdate(bool ledState, int threshold)
 {
   _ledState = ledState;
 
-  int currVal = analogRead(_pin);
-
-  bool active = (currVal > threshold);
+  bool active = (_currVal > threshold);
 
   if (_ledState)
   {
@@ -62,8 +60,7 @@ void MyoUtil::servoInit(int servoPin, int maxAngle)
 // Update the servo position based on muscle activity
 void MyoUtil::servoUpdate()
 {
-  int currVal = analogRead(_pin);
-  int angle = map(currVal, 0, 1023, 0, _maxAngle);
+  int angle = map(_currVal, 0, 1023, 0, _maxAngle);
   servo.write(angle);
   delay(10);
 }
@@ -71,9 +68,8 @@ void MyoUtil::servoUpdate()
 // Control a buzzer based on muscle activity (frequency modulation)
 void MyoUtil::buzzInit(int buzzPin, long maxFrequency)
 {
-  int currVal = analogRead(_pin);
   _buzzPin = buzzPin;
-  _frequency = map(currVal, 0, 1023, 100, maxFrequency);
+  _maxFrequency = maxFrequency;
 }
 
 // Update the buzzer pin to play a pitch based on muscle activity
@@ -81,13 +77,13 @@ void MyoUtil::buzzUpdate(bool buzzState)
 {
   if (buzzState)
   {
+    _frequency = map(_currVal, 0, 1023, 100, _maxFrequency);
     tone(_buzzPin, _frequency);
   }
   else
   {
     noTone(_buzzPin);
   }
-  
 }
 
 // Initialize the LCD (assuming a standard 16x2 LCD with specific pin configuration)
@@ -103,11 +99,10 @@ void MyoUtil::lcdInit()
 void MyoUtil::lcdPrint()
 {
   lcd.setCursor(0, 1);
+  lcd.print("         ");
+  lcd.setCursor(0, 1);
   lcd.print(analogRead(_pin));
   delay(10);
-  lcd.setCursor(0, 1);
-  lcd.print("     ");
-  lcd.setCursor(0, 1);
 }
 
 // Initialize the stepper motor with the specified number of steps and speed
@@ -122,8 +117,7 @@ void MyoUtil::stepperInit(int steps, int speed)
 // Update the stepper motor position based on muscle activity
 void MyoUtil::stepperUpdate()
 {
-  int currVal = analogRead(_pin);
-  int stepVal = map(currVal, 0, 1023, 0, _steps);
+  int stepVal = map(_currVal, 0, 1023, 0, _steps);
   stepper.step(stepVal - _prevStep);
   _prevStep = stepVal;
 }
@@ -138,7 +132,6 @@ void MyoUtil::genericInit(int pin)
 // Generic update function to map EMG readings to device
 void MyoUtil::genericUpdate()
 {
-  int currVal = analogRead(_pin);
-  int outVal = map(currVal, 0, 1023, 0, 255);
+  int outVal = map(_currVal, 0, 1023, 0, 255);
   analogWrite(_pinOUT, outVal);
 }
