@@ -65,12 +65,13 @@ void MyoUtil::servoUpdate()
   int currVal = analogRead(_pin);
   int angle = map(currVal, 0, 1023, 0, _maxAngle);
   servo.write(angle);
-  millis(10);
+  delay(10);
 }
 
 // Control a buzzer based on muscle activity (frequency modulation)
 void MyoUtil::buzzInit(int buzzPin, long maxFrequency)
 {
+  int currVal = analogRead(_pin);
   _buzzPin = buzzPin;
   _frequency = map(currVal, 0, 1023, 100, maxFrequency);
 }
@@ -78,7 +79,6 @@ void MyoUtil::buzzInit(int buzzPin, long maxFrequency)
 // Update the buzzer pin to play a pitch based on muscle activity
 void MyoUtil::buzzUpdate(bool buzzState)
 {
-  int currVal = analogRead(_pin);
   if (buzzState)
   {
     tone(_buzzPin, _frequency);
@@ -93,7 +93,7 @@ void MyoUtil::buzzUpdate(bool buzzState)
 // Initialize the LCD (assuming a standard 16x2 LCD with specific pin configuration)
 void MyoUtil::lcdInit()
 {
-  lcd = new LiquidCrystal(12, 11, 5, 4, 3, 2); // Generic pin configuration for stanadard hobbyist 16x2 LCD
+  lcd = new LiquidCrystal(12, 11, 5, 4, 3, 2); // Generic pin configuration for standard hobbyist 16x2 LCD
   lcd.begin(16, 2);
   lcd.setCursor(0, 0);
   lcd.print("EMG Value (Hz):");
@@ -104,7 +104,7 @@ void MyoUtil::lcdPrint()
 {
   lcd.setCursor(0, 1);
   lcd.print(analogRead(_pin));
-  millis(10);
+  delay(10);
   lcd.setCursor(0, 1);
   lcd.print("     ");
   lcd.setCursor(0, 1);
@@ -115,7 +115,7 @@ void MyoUtil::stepperInit(int steps, int speed)
 {
   _steps = steps;
   _prevStep = 0;
-  stepper = Stepper(_steps, 8, 9, 10, 11); // Generic pin configuration for bipolar stepper motor and H-Bridge configuration
+  stepper = new Stepper(_steps, 8, 9, 10, 11); // Generic pin configuration for bipolar stepper motor and H-Bridge configuration
   stepper.setSpeed(speed);
 }
 
