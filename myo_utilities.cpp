@@ -12,10 +12,10 @@ MyoUtil::MyoUtil(int pin)
 }
 
 // Output EMG reading to Serial for data visualization
-void MyoUtil::serialPlot()
+void MyoUtil::readData()
 {
-  _currVal = analogRead(_pin);
-  Serial.println(currVal);
+  int _currVal = analogRead(_pin);
+  Serial.println(_currVal);
   delay(50);
 }
 
@@ -89,7 +89,7 @@ void MyoUtil::buzzUpdate(bool buzzState)
 // Initialize the LCD (assuming a standard 16x2 LCD with specific pin configuration)
 void MyoUtil::lcdInit()
 {
-  lcd = new LiquidCrystal(12, 11, 5, 4, 3, 2); // Generic pin configuration for standard hobbyist 16x2 LCD
+  LiquidCrystal lcd = new LiquidCrystal(12, 11, 5, 4, 3, 2); // Generic pin configuration for standard hobbyist 16x2 LCD
   lcd.begin(16, 2);
   lcd.setCursor(0, 0);
   lcd.print("EMG Value (Hz):");
@@ -110,7 +110,7 @@ void MyoUtil::stepperInit(int steps, int speed)
 {
   _steps = steps;
   _prevStep = 0;
-  stepper = new Stepper(_steps, 8, 9, 10, 11); // Generic pin configuration for bipolar stepper motor and H-Bridge configuration
+  Stepper stepper = new Stepper(_steps, 8, 9, 10, 11); // Generic pin configuration for bipolar stepper motor and H-Bridge configuration
   stepper.setSpeed(speed);
 }
 

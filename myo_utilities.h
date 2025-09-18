@@ -22,7 +22,7 @@ class MyoUtil
 {
 public:
   MyoUtil(int pin);                                 // Constructor for EMG pin
-  void serialPlot();                                // Stream EMG to Serial Plotter
+  void readData();                                  // Read and store current EMG value
   int readRaw();                                    // Return raw EMG reading
   void ledInit(int ledPin);                         // LED init
   void ledUpdate(bool ledState, int threshold);     // Control an LED based on muscle activity
@@ -49,9 +49,7 @@ private:
   int _steps;        // Steps for stepper motor
   int _prevStep;     // Previous stepper position
   int _pinOUT;       // Generic device pinout
-  Stepper* stepper;   // Stepper motor object
   Servo servo;       // Servo object
-  LiquidCrystal* lcd; // LCD object
 };
 
 #endif
