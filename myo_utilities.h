@@ -22,24 +22,34 @@ class MyoUtil
 {
 public:
   MyoUtil(int pin);                                 // Constructor for EMG pin
-  void serialPlot();                                // Stream EMG to Serial Plotter
+  void readData();                                  // Read and store current EMG value
   int readRaw();                                    // Return raw EMG reading
   void ledInit(int ledPin);                         // LED init
-  void ledToggle(bool ledState, int threshold);     // Control an LED based on muscle activity
+  void ledUpdate(bool ledState, int threshold);     // Control an LED based on muscle activity
   void servoInit(int servoPin, int maxAngle);       // Servo init
   void servoUpdate();                               // Update servo position based on muscle activity
-  void buzzControl(int buzzPin, long maxFrequency); // Control a buzzer based on muscle activity
+  void buzzInit(int buzzPin, long maxFrequency);    // Initialize buzzer with frequency modulation
+  void buzzUpdate(bool buzzState);                  // Update buzzer based on muscle activity
   void lcdInit();                                   // Initialize the LCD
   void lcdPrint();                                  // Print EMG value to LCD
   void stepperInit(int steps, int speed);           // Stepper motor init
   void stepperUpdate();                             // Update stepper motor based on muscle activity
+  void genericInit(int pin);                        // Generic device pin init
+  void genericUpdate();                             // Generic device update based on muscle activity
+
 private:
-  int _pin;
-  int _ledPin;
-  bool _ledState;
-  int _servoPin;
-  int _maxAngle;
-  Servo servo;
+  bool _ledState;    // LED state (on/off)
+  long _frequency;   // Buzzer frequency
+  int _pin;          // EMG sensor pinout
+  int _currVal;      // Current EMG reading
+  int _ledPin;       // LED pinout
+  int _servoPin;     // Servo pinout
+  int _buzzPin;      // Buzzer pinout
+  int _maxAngle;     // Maximum servo angle
+  int _steps;        // Steps for stepper motor
+  int _prevStep;     // Previous stepper position
+  int _pinOUT;       // Generic device pinout
+  Servo servo;       // Servo object
 };
 
 #endif
